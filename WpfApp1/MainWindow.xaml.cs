@@ -1,46 +1,43 @@
 ﻿using getData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ScottPlot;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private double[] labels;
-        private double[] values;
+        private readonly JsData jsdata;
 
-        public MainWindow()
+        public MainWindow(JsData _jsdata)
         {
             InitializeComponent();
-            object labelsob = new object();
-            object valuesob = new object();
-            var jsdata = new getjsData();
-            labelsob = jsdata.labels;
-            valuesob = jsdata.values;
-            var x = ExtractDouble(labelsob);
-          var y =   ExtractDouble(valuesob);
-            plot1.Plot.AddScatter(labels,values);
-            plot1.Refresh();
+            this.jsdata = _jsdata;
+            InitializePlot();
         }
 
-        private double[] ExtractDouble(object? _jsob)
+        private void InitializePlot()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var (labels, values) = jsdata.GetData();
+              double[]   labelsarr = labels.ToArray();
+              double[]   valuesarr = values.ToArray();
+
+                if (labels != null && values != null)
+                {
+                    plot1.Plot.AddScatter(labelsarr, valuesarr);
+                    plot1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Data is missing or invalid.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
         }
     }
 }
