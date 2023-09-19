@@ -21,21 +21,39 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private double[] labels;
-        private double[] values;
+        private readonly DataProcessor dataProcessor;
 
         public MainWindow()
         {
             InitializeComponent();
-            object labelsob = new object();
-            object valuesob = new object();
-            var jsdata = new getjsData();
-            labelsob = jsdata.labels;
-            valuesob = jsdata.values;
-            var x = ExtractDouble(labelsob);
-          var y =   ExtractDouble(valuesob);
-            plot1.Plot.AddScatter(labels,values);
-            plot1.Refresh();
+            jsdata = new getjsData1();
+            InitializePlot();
+        }
+
+        private void InitializePlot()
+        {
+            try
+            {
+                var labels = jsdata.GetLabels();
+                var values = jsdata.GetValues();
+
+                if (labels != null && values != null)
+                {
+                    plot1.Plot.AddScatter(labels, values);
+                    plot1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Data missin or invalid.");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Data missin or invalid.");
+
+            }
+
         }
 
         private double[] ExtractDouble(object? _jsob)
