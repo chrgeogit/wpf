@@ -26,7 +26,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            jsdata = new getjsData1();
+            jsdata = new getjsData();
             InitializePlot();
         }
 

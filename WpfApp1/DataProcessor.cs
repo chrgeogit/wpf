@@ -4,9 +4,8 @@ namespace WpfApp1
 {
     public class DataProcessor
     {
-        private readonly getjsData1 jsData;
 
-        public DataProcessor(getjsData1 jsData) 
+        public DataProcessor(getjsData jsData) 
         {
             this.jsData = jsData;
         }
