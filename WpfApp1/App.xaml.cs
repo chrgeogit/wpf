@@ -1,4 +1,5 @@
-﻿using System;
+﻿using getData;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,14 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
+      public  JsData? Jsdatainst { get; private set; }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Jsdatainst = new JsData("http://192.168.2.15:5000/api/power");
+        
+
+
+        }
     }
 }

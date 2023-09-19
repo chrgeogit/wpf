@@ -7,12 +7,12 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        private readonly JsData jsdata;
+        private readonly JsData? jsdata;
 
-        public MainWindow(JsData _jsdata)
+        public MainWindow()
         {
             InitializeComponent();
-            this.jsdata = _jsdata;
+            this.jsdata = ((App)Application.Current).Jsdatainst;
             InitializePlot();
         }
 
