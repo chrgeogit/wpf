@@ -16,4 +16,14 @@
     </COMReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.67" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="getjsData">
+      <HintPath>..\..\getData\getData\bin\Debug\net6.0\getjsData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

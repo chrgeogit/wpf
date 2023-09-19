@@ -1,4 +1,5 @@
-﻿using System;
+﻿using getData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,26 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private double[] labels;
+        private double[] values;
+
         public MainWindow()
         {
             InitializeComponent();
+            object labelsob = new object();
+            object valuesob = new object();
+            var jsdata = new getjsData();
+            labelsob = jsdata.labels;
+            valuesob = jsdata.values;
+            var x = ExtractDouble(labelsob);
+          var y =   ExtractDouble(valuesob);
+            plot1.Plot.AddScatter(labels,values);
+            plot1.Refresh();
+        }
+
+        private double[] ExtractDouble(object? _jsob)
+        {
+            throw new NotImplementedException();
         }
     }
 }
